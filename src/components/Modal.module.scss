@@ -1,0 +1,29 @@
+
+.modalButton {
+  position: fixed;
+  inset: 0px;
+  background-color: #d1d5db;
+  opacity: 0.8;
+}
+
+.modal {
+  //fixed inset-40 p-10 bg-white
+  position: fixed;
+  inset: 10rem;
+  padding: 2.5rem;
+  background-color: rgb(255 255 255);
+
+  //flex flex-col justify-between h-full
+  &_inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+
+    .actionBar {
+      //flex justify-end
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+}

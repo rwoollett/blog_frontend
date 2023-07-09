@@ -1,0 +1,139 @@
+query Articles {
+  articles {
+    data {
+      attributes {
+        slug
+        title
+        category {
+          data {
+            attributes {
+              slug
+              name
+            }
+          }
+        }
+        image {
+          data {
+            attributes {
+              url
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+query Article($slug: String!) {
+  articles(filters: { slug: { eq: $slug } }) {
+    data {
+      id
+      attributes {
+        slug
+        title
+        category {
+          data {
+            attributes {
+              slug
+              name
+            }
+          }
+        }
+        image {
+          data {
+            attributes {
+              url
+            }
+          }
+        }
+        content
+        publishedAt
+      }
+    }
+  }
+}
+
+query Category($slug: String!) {
+  categories(filters: { slug: { eq: $slug } }) {
+    data {
+      attributes {
+        slug
+        name
+        articles {
+          data {
+            attributes {
+              slug
+              title
+              content
+              category {
+                data {
+                  attributes {
+                    name
+                    slug
+                  }
+                }
+              }
+              image {
+                data {
+                  attributes {
+                    url
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+query Categories {
+  categories {
+    data {
+      attributes {
+        ...CategoryItem
+      }
+    }
+  }
+}
+
+query CommentsByArticle($slug: String!) {
+  articles(filters: { slug: { eq: $slug } }) {
+    data {
+      attributes {
+        comments {
+          data {
+            id
+            attributes {
+              message
+              publishedAt
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+mutation CreateComment($data: CommentInput! ) {
+  createComment(data: $data) {
+    data {
+      id
+      attributes {
+        message
+        createdAt
+        publishedAt
+        article {
+          data {
+            attributes {
+              title
+              slug
+            }
+          }
+        }
+      }
+      
+    }
+  }
+}
